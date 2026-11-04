@@ -32,9 +32,16 @@ pytest -q
 
 Les métriques complètes sont dans `models/metrics.json`; le seuil demandé est accuracy >= 0.80, F1 par classe > 0.75 et inférence d'un batch de 50 < 100 ms.
 
-## Déploiement Hugging Face
+## Déploiement cloud gratuit avec GitHub Codespaces
 
-Créer un Space Docker, pousser le contenu du dépôt avec `Dockerfile`, `requirements-prod.txt`, `app_api.py`, `src/` et `models/`, puis remplacer l'URL locale dans `chrome-extension/popup.html` par l'URL `https://<espace>.hf.space`. La création et le push nécessitent les identifiants Hugging Face de l'étudiant.
+Le TP utilise GitHub Codespaces, car les Docker Spaces Hugging Face nécessitent désormais un abonnement payant. Depuis GitHub : **Code > Codespaces > Create codespace on main**. Dans le terminal du Codespace, exécuter :
+
+```bash
+docker build -t youtube-sentiment-api .
+docker run -d -p 7860:7860 -e PORT=7860 youtube-sentiment-api
+```
+
+Dans l'onglet **Ports**, rendre le port `7860` public. L'URL `https://<nom-du-codespace>-7860.app.github.dev` doit répondre sur `/health`, `/docs` et `/predict_batch`. Remplacer ensuite l'URL de l'API dans `chrome-extension/popup.html` par cette URL et recharger l'extension. Le Codespace est éphémère : il doit rester allumé et être relancé avant la démonstration.
 
 ## Questions de réflexion
 
