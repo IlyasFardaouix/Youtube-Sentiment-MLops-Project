@@ -1,0 +1,15 @@
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.env
+data/raw/*
+data/processed/*
+models/*.joblib
+models/*.json
+models/*.png
+logs/*
+!logs/.gitkeep
+*.zip
+.DS_Store
