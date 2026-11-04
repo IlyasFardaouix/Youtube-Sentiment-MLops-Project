@@ -7,4 +7,4 @@ COPY app_api.py .
 COPY src ./src
 COPY models ./models
 EXPOSE 7860
-CMD ["uvicorn", "app_api:app", "--host", "0.0.0.0", "--port", "7860"]
+CMD ["sh", "-c", "uvicorn app_api:app --host 0.0.0.0 --port ${PORT:-7860}"]
