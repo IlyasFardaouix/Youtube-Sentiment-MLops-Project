@@ -51,7 +51,7 @@
       2682
     ]
   ],
-  "inference_50_ms": 3.568599990103394,
+  "inference_50_ms": 4.0840000146999955,
   "candidates": {
     "logistic_regression": 0.8617530425270067,
     "linear_svm": 0.8989470805415014

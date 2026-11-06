@@ -6,13 +6,13 @@ Le projet automatise l'analyse de commentaires YouTube en trois classes : négat
 
 ## 2. Données et préparation
 
-La source officielle Reddit contient 37 149 commentaires. Après suppression des lignes vides, doublons et textes trop courts, 36 562 observations restent disponibles. La répartition est suffisante pour les trois classes : négatif 8 277, neutre 13 042, positif 15 830. Le split stratifié reproductible utilise 80 % pour l'entraînement et 20 % pour le test.
+La source officielle Reddit contient 37 249 commentaires (répartition brute : négatif 8 277, neutre 13 142, positif 15 830). Après mise en minuscules, nettoyage, suppression des doublons et des textes de moins de trois caractères, 36 562 observations restent disponibles (négatif 8 233, neutre 12 606, positif 15 723), soit bien plus de 1 000 par classe. Le split stratifié reproductible (`random_state=42`) utilise 80 % pour l'entraînement (29 249) et 20 % pour le test (7 313).
 
 Le nettoyage remplace les URLs, mentions et hashtags par des tokens (`URL`, `USER`, `HASHTAG`) afin de retirer le bruit sans perdre totalement leur signal. Les caractères non alphanumériques sont normalisés et les emojis Unicode sont conservés lorsqu'ils sont compatibles avec le texte.
 
 ## 3. Modélisation
 
-Deux modèles ont été comparés : Logistic Regression et Linear SVM, tous deux avec TF-IDF et pondération des classes. La Logistic Regression a ensuite été optimisée avec GridSearchCV sur `C`, `min_df` et `ngram_range`. Le meilleur réglage est `C=2.0`, `min_df=2`, `ngram_range=(1,1)`.
+Deux modèles ont été comparés : Logistic Regression et Linear SVM, tous deux avec TF-IDF et pondération des classes. Le Linear SVM non optimisé obtient une accuracy brute légèrement supérieure (89,9 % contre 86,2 %), mais la Logistic Regression a été retenue car elle fournit des probabilités (`predict_proba`) indispensables au score de confiance affiché par l'extension. Elle a ensuite été optimisée avec GridSearchCV (`cv=3`, score `f1_macro`) sur `C`, `min_df` et `ngram_range`; le meilleur réglage est `C=2.0`, `min_df=2`, `ngram_range=(1,1)`, portant son accuracy à 87,8 %. La comparaison des candidats est faite sur le jeu de test : c'est un choix pragmatique, une sélection sur un jeu de validation dédié serait plus rigoureuse.
 
 ## 4. Résultats
 
@@ -34,7 +34,7 @@ La matrice de confusion est disponible dans `models/metrics.json`. Les erreurs p
 
 ## 6. Déploiement
 
-Le `Dockerfile` utilise `python:3.10-slim`, installe uniquement `requirements-prod.txt`, copie le code et les modèles, et expose le port 7860. La création du Space Hugging Face, le push GitHub et la vidéo nécessitent les comptes et actions de l'étudiant; ils ne peuvent pas être effectués sans identifiants ni URL cible.
+Le `Dockerfile` utilise `python:3.10-slim`, installe uniquement `requirements-prod.txt`, copie le code et les modèles, et expose un port configurable via la variable `PORT` (défaut 7860). Le déploiement s'effectue dans un Codespace GitHub : `docker build` puis `docker run`, port 7860 rendu public. L'URL Codespaces est éphémère (arrêt automatique après environ 30 min d'inactivité) et doit être relancée avant la démonstration. La vidéo de démonstration relève de l'étudiant.
 
 ## 7. Difficultés et solutions
 

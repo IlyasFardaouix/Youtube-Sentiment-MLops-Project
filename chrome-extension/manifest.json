@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "description": "Analyse les commentaires YouTube visibles.",
   "permissions": ["activeTab", "storage", "clipboardWrite"],
-  "host_permissions": ["http://localhost:8000/*", "https://*.hf.space/*"],
+  "host_permissions": ["http://localhost:8000/*", "https://*.app.github.dev/*", "https://*.hf.space/*"],
   "action": {"default_popup": "popup.html"},
   "content_scripts": [{"matches": ["https://www.youtube.com/watch?v=*"], "js": ["content.js"], "run_at": "document_idle"}]
 }
