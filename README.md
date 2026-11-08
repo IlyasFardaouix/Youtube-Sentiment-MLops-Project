@@ -1,5 +1,7 @@
 # YouTube Sentiment Lens
 
+**Réalisé par : Ilyas Fardaoui — Encadré par : Prof. Maria Zemzami** · Filière INDIA, ENSAM Rabat (2026/27)
+
 Projet MLOps de classification de sentiment des commentaires Reddit/YouTube avec TF-IDF, Logistic Regression optimisée, API FastAPI et extension Chrome Manifest V3.
 
 ## Architecture

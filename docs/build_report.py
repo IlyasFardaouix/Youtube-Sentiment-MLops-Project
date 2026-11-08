@@ -159,7 +159,7 @@ def build() -> Path:
         cover = page_frame("Rapport technique", "Projet ML complet - Analyse de sentiment YouTube")
         cover.text(0.08, 0.72, "YouTube\nSentiment Lens", fontsize=34, weight="bold", color=NAVY, linespacing=1.15)
         cover.text(0.08, 0.53, "Du développement au déploiement cloud", fontsize=17, color=ORANGE)
-        cover.text(0.08, 0.39, "Filière INDIA | Année universitaire 2026/27\nUniversité Mohamed V - ENSAM Rabat\nProf. Maria Zemzami", fontsize=12, color=INK, linespacing=1.6)
+        cover.text(0.08, 0.39, "Réalisé par : Ilyas Fardaoui\nEncadré par : Prof. Maria Zemzami\nFilière INDIA | Année universitaire 2026/27\nUniversité Mohamed V - ENSAM Rabat", fontsize=12, color=INK, linespacing=1.6)
         footer(cover, 1)
         pdf.savefig(cover, facecolor=PAPER)
         plt.close(cover)
